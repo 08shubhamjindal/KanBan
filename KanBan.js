@@ -52,14 +52,33 @@ function addJobs(titlevalue, datevalue, assigneevalue){
 }
 
 function displayData(titlevalue, datevalue, assigneevalue, division) {
-  document.getElementById(division).innerHTML = document.getElementById(division).innerHTML + `<div class="row">
-    <div class="col s12 m6">
-      <div class="card blue-grey darken-1">
-        <div class="card-content white-text">
-          <span class="card-title" contentEditable="true">${titlevalue}</span>
-          <p contentEditable="true">${datevalue}</p>
-          <p contentEditable="true">${assigneevalue}</p>
+  console.log(sessionStorage.getItem(division));
+  var test = [];
+  if(sessionStorage.getItem(division)==null){
+    var value = [titlevalue, datevalue, assigneevalue];
+    sessionStorage.setItem(division, JSON.stringify(value))
+    test = JSON.parse(sessionStorage.getItem(division));
+  }else{
+    test = JSON.parse(sessionStorage.getItem(division));
+    test.push(titlevalue);
+    test.push(datevalue);
+    test.push(assigneevalue);
+    sessionStorage.setItem(division, JSON.stringify(test))
+    test = JSON.parse(sessionStorage.getItem(division));
+  }
+
+  document.getElementById(division).innerHTML = "";
+  for(var i=0; i<test.length; i=i+3){
+    document.getElementById(division).innerHTML = document.getElementById(division).innerHTML + `<div class="row">
+      <div class="col s12 m6">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title" contentEditable="true">${test[i]}</span>
+            <p contentEditable="true">${test[i+1]}</p>
+            <p contentEditable="true">${test[i+2]}</p>
+        </div>
       </div>
-    </div>
-  </div>`
+    </div>`
+  }
+
 }
