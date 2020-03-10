@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Materialize Grids Example</title>
+    <meta name = "viewport" content = "width = device-width, initial-scale = 1">
+    <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js">
+    </script>
+    <link rel="stylesheet" type="text/css" href="KanBan.css">
+  <body>
+
+<div class="row">
+  <div id="check">
+    </div>
+</div>
+
+<div class="row">
+<form class="col s12" id="myForm1" style ="display: none";>
+  <div class="row">
+    <div class="input-field col s6">
+      <input placeholder="Title" id="title" type="text" class="validate">
+      <label for="title">Title</label>
+    </div>
+    <div class="input-field col s6">
+      <input id="date" type="text" class="validate">
+      <label for="date">Date</label>
+    </div>
+  </div>
+  <label>Choose Assignee</label>
+ <select class="browser-default"  id="selectNumber">
+   <option value="" disabled selected>Choose your option</option>
+ </select>
+  <button type="button" class="btn" onclick="getData()">Add Job</button>
+  <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+</form>
+</div>
+      <!--form-->
+      <div class="form-popup" id="myForm">
+      <form class="form-container">
+      <h3>Add Job</h3>
+      <label for="title"><b>Title</b></label>
+      <input type="text" id="title" placeholder="Enter Title" name="title" required>
+      <label for="date"><b>Due Date</b></label>
+      <input type="text" id="date" placeholder="Enter Date" name="date" required>
+       <select id="selectNumber">
+       <option>Choose Assignee</option>
+       </select>
+      <button type="button" class="btn" onclick="getData()">Add Job</button>
+      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+     </form>
+    </div>
+
+    <script src="KanBan.js"></script>
+  </body>
+</html>
