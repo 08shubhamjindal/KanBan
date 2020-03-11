@@ -20,22 +20,25 @@
 <form class="col s12" id="myForm1" style ="display: none";>
   <div class="row">
     <div class="input-field col s6">
-      <input placeholder="Title" id="title" type="text" class="validate">
+      <input placeholder="Title" id="title" type="text" class="validate" required>
       <label for="title">Title</label>
     </div>
     <div class="input-field col s6">
-      <input id="date" type="text" class="validate">
-      <label for="date">Date</label>
+    <input type=text name="bdate" id="date" class="datepicker" required>
+    <label for="bdate">Date</label>
     </div>
   </div>
   <label>Choose Assignee</label>
- <select class="browser-default"  id="selectNumber">
+  <select class="browser-default"  id="selectNumber" required>
    <option value="" disabled selected>Choose your option</option>
  </select>
   <button type="button" class="btn" onclick="getData()">Add Job</button>
   <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
 </form>
 </div>
-    <script src="KanBan.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+  <script src="KanBan.js"></script>
   </body>
 </html>

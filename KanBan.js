@@ -1,5 +1,19 @@
-var getid;
+var currYear = (new Date()).getFullYear();
+$(document).ready(function() {
+  $(".datepicker").datepicker({
+    defaultDate: new Date(currYear-5,1,31),
+    maxDate: new Date(currYear-5,12,31),
+    yearRange: [1928, currYear-5],
+    format: "yyyy/mm/dd"
+  });
+});
 
+window.onload = function() {
+  previousData("divPlanned")
+  previousData("divStarted")
+  previousData("divDone")
+};
+var getid;
 var select = document.getElementById("selectNumber");
 var options = ["Dhruv Jain", "Shubham Jindal", "Gaurav Jain", "Aakash", "Vidhan"];
 for(var i = 0; i < options.length; i++) {
@@ -52,33 +66,39 @@ function addJobs(titlevalue, datevalue, assigneevalue){
 }
 
 function displayData(titlevalue, datevalue, assigneevalue, division) {
-  console.log(sessionStorage.getItem(division));
   var test = [];
-  if(sessionStorage.getItem(division)==null){
+  if(localStorage.getItem(division)==null){
     var value = [titlevalue, datevalue, assigneevalue];
-    sessionStorage.setItem(division, JSON.stringify(value))
-    test = JSON.parse(sessionStorage.getItem(division));
+    localStorage.setItem(division, JSON.stringify(value))
+    test = JSON.parse(localStorage.getItem(division));
   }else{
-    test = JSON.parse(sessionStorage.getItem(division));
+    console.log(JSON.parse(localStorage.getItem(division)));
+    test = JSON.parse(localStorage.getItem(division));
     test.push(titlevalue);
     test.push(datevalue);
     test.push(assigneevalue);
-    sessionStorage.setItem(division, JSON.stringify(test))
-    test = JSON.parse(sessionStorage.getItem(division));
+    localStorage.setItem(division, JSON.stringify(test))
+    test = JSON.parse(localStorage.getItem(division));
   }
+   previousData(division);
+}
 
-  document.getElementById(division).innerHTML = "";
-  for(var i=0; i<test.length; i=i+3){
-    document.getElementById(division).innerHTML = document.getElementById(division).innerHTML + `<div class="row">
-      <div class="col s12 m6">
-        <div class="card blue-grey darken-1">
-          <div class="card-content white-text">
-            <span class="card-title" contentEditable="true">${test[i]}</span>
-            <p contentEditable="true">${test[i+1]}</p>
-            <p contentEditable="true">${test[i+2]}</p>
-        </div>
-      </div>
-    </div>`
+function previousData(division){
+  if(localStorage.getItem(division)!=null){
+     test = JSON.parse(localStorage.getItem(division));
+     document.getElementById(division).innerHTML = "";
+     for(var i=0; i<test.length; i=i+3){
+       document.getElementById(division).innerHTML = document.getElementById(division).innerHTML + `<div class="row">
+         <div class="col s6 m6">
+           <div class="card red darken-1">
+             <div class="card-content white-text">
+               <span class="card-title" contentEditable="true">${test[i]}</span>
+               <p contentEditable="true">${test[i+1]}</p>
+               <i class="material-icons">recent_actors</i>
+               <p contentEditable="true">${test[i+2]}</p>
+           </div>
+         </div>
+       </div>`
+     }
   }
-
 }
