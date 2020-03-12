@@ -20,16 +20,16 @@
 <form class="col s12" id="myForm1" style ="display: none";>
   <div class="row">
     <div class="input-field col s6">
-      <input placeholder="Title" id="title" type="text" class="validate" required>
+      <input placeholder="Title" id="title" type="text" class="validate" required="" aria-required="true">
       <label for="title">Title</label>
     </div>
     <div class="input-field col s6">
-    <input type=text name="bdate" id="date" class="datepicker" required>
+    <input type=text name="bdate" id="date" class="datepicker" required="" aria-required="true">
     <label for="bdate">Date</label>
     </div>
   </div>
   <label>Choose Assignee</label>
-  <select class="browser-default"  id="selectNumber" required>
+  <select class="browser-default"  id="selectNumber" required="" aria-required="true">
    <option value="" disabled selected>Choose your option</option>
  </select>
   <button type="button" class="btn" onclick="getData()">Add Job</button>

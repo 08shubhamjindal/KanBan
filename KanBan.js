@@ -13,6 +13,7 @@ window.onload = function() {
   previousData("divStarted")
   previousData("divDone")
 };
+
 var getid;
 var select = document.getElementById("selectNumber");
 var options = ["Dhruv Jain", "Shubham Jindal", "Gaurav Jain", "Aakash", "Vidhan"];
@@ -68,12 +69,12 @@ function addJobs(titlevalue, datevalue, assigneevalue){
 function displayData(titlevalue, datevalue, assigneevalue, division) {
   var test = [];
   if(localStorage.getItem(division)==null){
-    var value = [titlevalue, datevalue, assigneevalue];
+    var value = [0, titlevalue, datevalue, assigneevalue];
     localStorage.setItem(division, JSON.stringify(value))
     test = JSON.parse(localStorage.getItem(division));
   }else{
-    console.log(JSON.parse(localStorage.getItem(division)));
     test = JSON.parse(localStorage.getItem(division));
+    test.push(test[test.length-4]+1);
     test.push(titlevalue);
     test.push(datevalue);
     test.push(assigneevalue);
@@ -87,18 +88,27 @@ function previousData(division){
   if(localStorage.getItem(division)!=null){
      test = JSON.parse(localStorage.getItem(division));
      document.getElementById(division).innerHTML = "";
-     for(var i=0; i<test.length; i=i+3){
+     for(var i=0; i<test.length; i=i+4){
        document.getElementById(division).innerHTML = document.getElementById(division).innerHTML + `<div class="row">
          <div class="col s6 m6">
            <div class="card red darken-1">
-             <div class="card-content white-text">
-               <span class="card-title" contentEditable="true">${test[i]}</span>
-               <p contentEditable="true">${test[i+1]}</p>
-               <i class="material-icons">recent_actors</i>
+              <i class="material-icons right green" onclick="deletecard(${test[i]}, '${division}', '${test}')">delete_sweep</i>
+              <div class="card-content white-text">
+               <span class="card-title" contentEditable="true">${test[i+1]}</span>
                <p contentEditable="true">${test[i+2]}</p>
+               <i class="material-icons">recent_actors</i>
+               <p contentEditable="true">${test[i+3]}</p>
            </div>
          </div>
        </div>`
      }
   }
+}
+
+function deletecard(index, division){
+  var test = JSON.parse(localStorage.getItem(division));
+  console.log(test);
+  index = test.indexOf(index);
+  test.splice(index , 4);
+  localStorage.setItem(division, JSON.stringify(test));
 }
